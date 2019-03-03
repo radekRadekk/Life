@@ -4,7 +4,7 @@
 #include "game.h"
 
 //w mainie są robocze testy
-
+//test
 int main() {
     printf("Hello, World!\n");
     cell *testCell = createCell(0, 0);
