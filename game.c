@@ -5,7 +5,7 @@
 #include "field.h"
 
 list *createList(int num) {
-    list *newList = malloc(sizeof(newList));
+    list *newList = malloc(sizeof(*newList));
     newList->value = num;
     newList->next = NULL;
     return newList;
@@ -70,7 +70,7 @@ int isGoodPattern(char *rulesPattern) {
 gameRules *createGameRules(char *rulesPattern, char *countingNeighboursMethod) {
     char *DEFAULT_PATTERN = "23/3";
     int i = 0;
-    gameRules *gRules = malloc(sizeof(gRules));
+    gameRules *gRules = malloc(sizeof(*gRules));
     gRules->liveToLiveNums = createList(-1);                                //dodaję minus jedynki, bo mi się krzaczyło
     gRules->deadToLiveNums = createList(-1);                                //coś z listą, a tak działa
     gRules->countingNeighboursMethod = countingNeighboursMethod;            //no i nie można mieć -1 sąsiada, więc nic

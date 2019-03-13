@@ -1,10 +1,9 @@
 #include <stdlib.h>
-#include <memory.h>
 #include "field.h"
 #include "cell.h"
 
 field *createField(int sizeX, int sizeY) {
-    field *newField = malloc(sizeof(field *));
+    field *newField = malloc(sizeof(*newField));
     newField->sizeX = sizeX;
     newField->sizeY = sizeY;
     newField->gameField = malloc(sizeX * sizeY * sizeof(cell *));
