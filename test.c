@@ -3,7 +3,7 @@
 #include "field.h"
 #include "game.h"
 
-void test(){
+void test() {
     cell *testCell = createCell(0, 0);
     printf("%d\n", testCell->isAlive);
     testCell->isAlive = 1;
@@ -64,8 +64,8 @@ void test(){
 
     printf("Pattern!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     gameRules *testRules = createGameRules("123/456", "MOORE");
-
     list *iterLiveToLive = testRules->liveToLiveNums;
+    printf("contains live test: %d\n", contains(iterLiveToLive, 1));
     while (iterLiveToLive->next != NULL) {
         printf("%d\n", iterLiveToLive->value);
         iterLiveToLive = iterLiveToLive->next;
@@ -73,6 +73,7 @@ void test(){
     printf("%d\n", iterLiveToLive->value);
 
     list *iterDeadToLive = testRules->deadToLiveNums;
+    printf("contains dead test: %d\n", contains(iterDeadToLive, 1));
     while (iterDeadToLive->next != NULL) {
         printf("%d\n", iterDeadToLive->value);
         iterDeadToLive = iterDeadToLive->next;

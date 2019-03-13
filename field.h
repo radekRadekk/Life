@@ -1,10 +1,7 @@
-
 #ifndef LIFE_FIELD_H
 #define LIFE_FIELD_H
 
 #include "cell.h"
-
-
 
 typedef struct _field {
     int sizeX;
@@ -26,6 +23,7 @@ void countNeighboursNeumann(cell *, field *);
 
 void countNeighbours(field *, char *);
 
+int isAnyAlive(field *);
 
 #endif //LIFE_FIELD_H
 

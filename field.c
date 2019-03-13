@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "field.h"
 #include "cell.h"
 
@@ -81,6 +82,19 @@ void countNeighbours(field *f, char *method) {
     }
 }
 
+//  1 - true;   0 - false
+int isAnyAlive(field *f) {
+    int isAnyAlive = 0;
+    for (int x = 0; x < f->sizeX; x++) {
+        for (int y = 0; y < f->sizeY; y++) {
+            if (getCell(f, x, y)->isAlive == 1) {
+                isAnyAlive = 1;
+                break;
+            }
+        }
+    }
+    return isAnyAlive;
+}
 
 
 
