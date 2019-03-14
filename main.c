@@ -3,6 +3,7 @@
 #include "field.h"
 #include "game.h"
 #include "test.h"
+#include "saving.h"
 
 int main(int argc, char **argv) {
     // test();
@@ -33,5 +34,6 @@ int main(int argc, char **argv) {
 //    destroyField(testFieldConfig);
 
     printf("%d\n", isGoodPattern("111121/2"));
+    //generateFileName("file", 10);
     return 0;
 }

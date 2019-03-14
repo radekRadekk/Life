@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "game.h"
 #include "field.h"
+#include "saving.h"
 
 void changeCellState(cell *c, gameRules *gRules) {
     if ((c->isAlive == 1) && (contains(gRules->liveToLiveNums, c->neighboursNum) == 0))
@@ -21,18 +22,13 @@ void doGeneration(field *f, gameRules *gRules) {
 // to refractor
 void playGame(field *f, config *c) {
     int iterNum = 0;
+    int pictureNumber = 1;
     while (isAnyAlive(f) == 1 && iterNum < c->iterationsNum) {
         doGeneration(f, c->gRules);
-        //if (iterNum % c->savingFreq == 0) {
-        for (int y = 0; y < f->sizeX; y++) {
-            for (int x = 0; x < f->sizeY; x++) {
-                printf("%d", getCell(f, x, y)->isAlive);
-            }
-            printf("\n");
+        if (iterNum % c->savingFreq == 0) {
+            createSave(f, "picture", pictureNumber);
+            pictureNumber++;
         }
-        printf("\n================================================================\n");
-
-        // }
         iterNum++;
     }
 }
