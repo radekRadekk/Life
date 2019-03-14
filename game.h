@@ -5,7 +5,7 @@
 #include "field.h"
 #include "configuration.h"
 
-void changeCellSatate(cell *, gameRules *);
+void changeCellState(cell *, gameRules *);
 
 void doGeneration(field *, gameRules *);
 

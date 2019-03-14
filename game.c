@@ -4,21 +4,21 @@
 #include "game.h"
 #include "field.h"
 
-void changeCellSatate(cell *c, gameRules *gRules) {
+void changeCellState(cell *c, gameRules *gRules) {
     if ((c->isAlive == 1) && (contains(gRules->liveToLiveNums, c->neighboursNum) == 0))
         c->isAlive = 0;
     else if ((c->isAlive == 0) && (contains(gRules->deadToLiveNums, c->neighboursNum) == 1))
         c->isAlive = 1;
 }
 
-//do unit test
 void doGeneration(field *f, gameRules *gRules) {
     countNeighbours(f, gRules->countingNeighboursMethod);
     for (int x = 0; x < f->sizeX; x++)
         for (int y = 0; y < f->sizeY; y++)
-            changeCellSatate(getCell(f, x, y), gRules);
+            changeCellState(getCell(f, x, y), gRules);
 }
 
+// to refractor
 void playGame(field *f, config *c) {
     int iterNum = 0;
     while (isAnyAlive(f) == 1 && iterNum < c->iterationsNum) {

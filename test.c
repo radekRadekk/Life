@@ -46,40 +46,40 @@ void test() {
 
     printf("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 
-    list *testList = createList(0);
-    add(testList, 1);
-    add(testList, 2);
-    add(testList, 3);
+//    list *testList = createList(0);
+//    add(testList, 1);
+//    add(testList, 2);
+//    add(testList, 3);
+//
+//    list *iter = testList;
+//    while (iter->next != NULL) {
+//        printf("%d\n", iter->value);
+//        iter = iter->next;
+//    }
+//    printf("%d\n", iter->value);
+//    printf("%d\n", contains(testList, 0));
+//    destroyList(testList);
+//
+//    //printf("%d\n", isGoodPattern("12a/123"));
+//
+//    printf("Pattern!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+//    gameRules *testRules = createGameRules("123/456", "MOORE");
+//    list *iterLiveToLive = testRules->liveToLiveNums;
+//    printf("contains live test: %d\n", contains(iterLiveToLive, 1));
+//    while (iterLiveToLive->next != NULL) {
+//        printf("%d\n", iterLiveToLive->value);
+//        iterLiveToLive = iterLiveToLive->next;
+//    }
+//    printf("%d\n", iterLiveToLive->value);
+//
+//    list *iterDeadToLive = testRules->deadToLiveNums;
+//    printf("contains dead test: %d\n", contains(iterDeadToLive, 1));
+//    while (iterDeadToLive->next != NULL) {
+//        printf("%d\n", iterDeadToLive->value);
+//        iterDeadToLive = iterDeadToLive->next;
+//    }
+//    printf("%d\n", iterDeadToLive->value);
 
-    list *iter = testList;
-    while (iter->next != NULL) {
-        printf("%d\n", iter->value);
-        iter = iter->next;
-    }
-    printf("%d\n", iter->value);
-    printf("%d\n", contains(testList, 0));
-    destroyList(testList);
-
-    //printf("%d\n", isGoodPattern("12a/123"));
-
-    printf("Pattern!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
-    gameRules *testRules = createGameRules("123/456", "MOORE");
-    list *iterLiveToLive = testRules->liveToLiveNums;
-    printf("contains live test: %d\n", contains(iterLiveToLive, 1));
-    while (iterLiveToLive->next != NULL) {
-        printf("%d\n", iterLiveToLive->value);
-        iterLiveToLive = iterLiveToLive->next;
-    }
-    printf("%d\n", iterLiveToLive->value);
-
-    list *iterDeadToLive = testRules->deadToLiveNums;
-    printf("contains dead test: %d\n", contains(iterDeadToLive, 1));
-    while (iterDeadToLive->next != NULL) {
-        printf("%d\n", iterDeadToLive->value);
-        iterDeadToLive = iterDeadToLive->next;
-    }
-    printf("%d\n", iterDeadToLive->value);
-
-    destroyGameRules(testRules);
+//    destroyGameRules(testRules);
 }
 
