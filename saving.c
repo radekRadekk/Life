@@ -10,7 +10,7 @@ void createSave(field *f, char *base, int num) {
     char *bashScriptFileName = generateFileName(base, ".sh", num);
 
     saveField(f, dataFileName);
-    generateGnuplotScript(bashScriptFileName, dataFileName, pngFileName);
+    generateGnuplotScript(gnuplotScriptFileName, dataFileName, pngFileName);
     generateBashScript(bashScriptFileName, gnuplotScriptFileName);
 
     char *command = malloc(strlen(bashScriptFileName) + 3);
@@ -97,6 +97,6 @@ void *generateGnuplotScript(char *scriptFileName, char *dateFileName, char *pngF
 void *generateBashScript(char *scriptFileName, char *gnuplotScriptName) {
     FILE *file = fopen(scriptFileName, "w");
     fprintf(file, "#!/bin/bash\n");
-    fprintf(file, "%s%s\n", "$ ./gnuplot ", gnuplotScriptName);
+    fprintf(file, "%s%s\n", "gnuplot ", gnuplotScriptName);
     fclose(file);
 }
