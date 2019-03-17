@@ -3,7 +3,7 @@
 
 #include "field.h"
 
-void createSave(field *f, char *base, int num);
+void createImage(field *f, char *base, int num);
 
 void saveField(field *f, char *filePath);
 
@@ -11,6 +11,6 @@ char *generateFileName(char *base, char *extension, int num);
 
 void *generateGnuplotScript(char *scriptFileName, char *dateFileName, char *pngFileName);
 
-void *generateBashScript(char *scriptFileName, char *gnuplotScriptName);
+char *createCommand(char *base, char *fileName);
 
 #endif //LIFE_SAVING_H

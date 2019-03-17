@@ -1,47 +1,29 @@
-#include "saving.h"
+#include "imgCreation.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-void createSave(field *f, char *base, int num) {
+void createImage(field *f, char *base, int num) {
     char *dataFileName = generateFileName(base, ".txt", num);
     char *pngFileName = generateFileName(base, ".png", num);
     char *gnuplotScriptFileName = generateFileName(base, ".gpi", num);
-    char *bashScriptFileName = generateFileName(base, ".sh", num);
 
     saveField(f, dataFileName);
     generateGnuplotScript(gnuplotScriptFileName, dataFileName, pngFileName);
-    generateBashScript(bashScriptFileName, gnuplotScriptFileName);
 
-    char *command = malloc(strlen(bashScriptFileName) + 3);
-    int commandIter = 0;
-    command[commandIter++] = '.';
-    command[commandIter++] = '/';
-    for (int i = 0; i < strlen(bashScriptFileName); i++)
-        command[commandIter++] = bashScriptFileName[i];
-    command[commandIter] = '\0';
+    char *commandExe = createCommand("gnuplot ", gnuplotScriptFileName);
+    char *commandChmod = createCommand("chmod -x ", gnuplotScriptFileName);
 
-    system(command);
-    system("rm *.sh");
+    system(commandChmod);
+    system(commandExe);
     system("rm *.txt");
     system("rm *.gpi");
 
     free(dataFileName);
     free(pngFileName);
     free(gnuplotScriptFileName);
-    free(bashScriptFileName);
-    free(command);
-}
-
-void saveField(field *f, char *filePath) {
-    FILE *file = fopen(filePath, "w");
-    for (int y = 0; y < f->sizeY; y++) {
-        for (int x = 0; x < f->sizeX; x++) {
-            fprintf(file, "%d", getCell(f, x, y)->isAlive);
-        }
-        fprintf(file, "\n");
-    }
-    fclose(file);
+    free(commandChmod);
+    free(commandExe);
 }
 
 char *generateFileName(char *base, char *extension, int num) {
@@ -94,9 +76,14 @@ void *generateGnuplotScript(char *scriptFileName, char *dateFileName, char *pngF
     fclose(file);
 }
 
-void *generateBashScript(char *scriptFileName, char *gnuplotScriptName) {
-    FILE *file = fopen(scriptFileName, "w");
-    fprintf(file, "#!/bin/bash\n");
-    fprintf(file, "%s%s\n", "gnuplot ", gnuplotScriptName);
-    fclose(file);
+char *createCommand(char *base, char *fileName) {
+    char *command = malloc(strlen(fileName) + strlen(base) + 1);
+    int commandIter = 0;
+    for (int i = 0; i < strlen(base); i++)
+        command[commandIter++] = base[i];
+    for (int i = 0; i < strlen(fileName); i++)
+        command[commandIter++] = fileName[i];
+    command[commandIter] = '\0';
+
+    return command;
 }

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "game.h"
 #include "field.h"
-#include "saving.h"
+#include "imgCreation.h"
 
 void changeCellState(cell *c, gameRules *gRules) {
     if ((c->isAlive == 1) && (contains(gRules->liveToLiveNums, c->neighboursNum) == 0))
@@ -26,10 +26,9 @@ void playGame(field *f, config *c) {
     while (isAnyAlive(f) == 1 && iterNum < c->iterationsNum) {
         doGeneration(f, c->gRules);
         if (iterNum % c->savingFreq == 0) {
-            createSave(f, "picture", pictureNumber);
+            createImage(f, "picture", pictureNumber);
             pictureNumber++;
         }
         iterNum++;
     }
 }
-

@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "cell.h"
 #include "field.h"
 #include "game.h"
 #include "test.h"
-#include "saving.h"
+#include "imgCreation.h"
 
 int main(int argc, char **argv) {
     // test();
@@ -33,7 +34,15 @@ int main(int argc, char **argv) {
 //    destroyConfig(testConfig);
 //    destroyField(testFieldConfig);
 
-    printf("%d\n", isGoodPattern("111121/2"));
-    //generateFileName("file", 10);
+//    printf("%d\n", isGoodPattern("111121/2"));
+//    char *base = "dupa";
+//    char *ext = ".rar";
+//    printf("%s %s\n",base,ext);
+//    char *fileName = generateFileName(base,ext,10);
+//    printf("fileName: %s\n",fileName);
+//    printf("%s %s\n",base,ext);
+//    free(fileName);
+    field *testField = createField(3,3);
+    createSave(testField,"plik",10);
     return 0;
 }
