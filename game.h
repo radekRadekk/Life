@@ -5,11 +5,13 @@
 #include "field.h"
 #include "configuration.h"
 
+void setRandomCellsAlive(field *f, int num);
+
 void changeCellState(cell *, gameRules *);
 
 void doGeneration(field *, gameRules *);
 
-void playGame(field *, config *);
+void playGame(config *);
 
 #endif //LIFE_GAME_H
 
