@@ -9,7 +9,7 @@ void saveField(field *f, char *filePath);
 
 char *generateFileName(char *base, char *extension, int num);
 
-void *generateGnuplotScript(char *scriptFileName, char *dateFileName, char *pngFileName);
+void generateGnuplotScript(char *scriptFileName, char *dateFileName, char *pngFileName);
 
 char *createCommand(char *base, char *fileName);
 

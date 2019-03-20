@@ -56,7 +56,7 @@ char *generateFileName(char *base, char *extension, int num) {
     return fileName;
 }
 
-void *generateGnuplotScript(char *scriptFileName, char *dateFileName, char *pngFileName) {
+void generateGnuplotScript(char *scriptFileName, char *dateFileName, char *pngFileName) {
     FILE *file = fopen(scriptFileName, "w");
     fprintf(file, "%s\n", "set term pngcairo size 1920,1080 enhanced square");
     fprintf(file, "%s\n", "unset border");

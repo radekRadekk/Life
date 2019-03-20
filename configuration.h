@@ -4,7 +4,7 @@
 #include "list.h"
 
 typedef struct _gameRules {
-    char *countingNeighboursMethod;         //możesz zmienić nazwę, bo ciut długa
+    char *countingNeighboursMethod;                         //możesz zmienić nazwę, bo ciut długa
     list *liveToLiveNums;
     list *deadToLiveNums;
 } gameRules;

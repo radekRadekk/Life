@@ -48,7 +48,6 @@ void definePatternNums(char *pattern, list *previous, list *next) {
 
 gameRules *createGameRules(char *rulesPattern, char *countingNeighboursMethod) {
     char *DEFAULT_PATTERN = "23/3";
-    int i = 0;
     gameRules *gRules = malloc(sizeof(*gRules));
     gRules->liveToLiveNums = createList(-1);
     gRules->deadToLiveNums = createList(-1);
@@ -81,26 +80,26 @@ config *createConfig(int argc, char **argv) {
     int tmpSavingFreqNoLimit = -1;
     int tmpMode = 2;
     char *tmpGameRulesPattern = "xxx";
-    char *tmpMethod = "xxx ";
+    char *tmpMethod = "MOORE";
 
     for (int i = 1; i < argc - 1; i++) {
-        if (strcmp(argv[i], "-x") && atoi(argv[i + 1]) > 0) {
+        if ((strcmp(argv[i], "-x") == 0) && (atoi(argv[i + 1]) > 0)) {
             newConfig->sizeX = atoi(argv[i + 1]);
-        } else if (strcmp(argv[i], "-y") && atoi(argv[i + 1]) > 0) {
+        } else if ((strcmp(argv[i], "-y") == 0) && (atoi(argv[i + 1]) > 0)) {
             newConfig->sizeY = atoi(argv[i + 1]);
-        } else if (strcmp(argv[i], "-a") && atoi(argv[i + 1]) > 0) {
+        } else if ((strcmp(argv[i], "-a") == 0) && (atoi(argv[i + 1]) > 0)) {
             tmpAliveCellsNum = atoi(argv[i + 1]);
-        } else if (strcmp(argv[i], "-i") && atoi(argv[i + 1]) > 0) {
+        } else if ((strcmp(argv[i], "-i") == 0) && (atoi(argv[i + 1]) > 0)) {
             newConfig->iterationsNum = atoi(argv[i + 1]);
-        } else if (strcmp(argv[i], "-f") && atoi(argv[i + 1]) > 0) {
+        } else if ((strcmp(argv[i], "-f") == 0) && (atoi(argv[i + 1]) > 0)) {
             tmpSavingFreq = atoi(argv[i + 1]);
-        } else if (strcmp(argv[i], "-ff") && atoi(argv[i + 1]) > 0) {
+        } else if ((strcmp(argv[i], "-ff") == 0) && (atoi(argv[i + 1]) > 0)) {
             tmpSavingFreqNoLimit = atoi(argv[i + 1]);
-        } else if (strcmp(argv[i], "-r")) {
+        } else if (strcmp(argv[i], "-r") == 0) {
             tmpGameRulesPattern = argv[i + 1];
-        } else if (strcmp(argv[i], "-me")) {
+        } else if ((strcmp(argv[i], "-me") == 0)&&(strcmp(argv[i],"NEUMANN")==0)) {
             tmpMethod = argv[i + 1];
-        } else if (strcmp(argv[i], "-mo") && atoi(argv[i + 1]) > 0) {
+        } else if ((strcmp(argv[i], "-mo") == 0) && (atoi(argv[i + 1]) > 0)) {
             tmpMode = atoi(argv[i + 1]);
         }
     }
