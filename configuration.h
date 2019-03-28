@@ -4,7 +4,7 @@
 #include "list.h"
 
 typedef struct _gameRules {
-    char *countingNeighboursMethod;                         //możesz zmienić nazwę, bo ciut długa
+    char *countingNeighboursMethod;
     list *liveToLiveNums;
     list *deadToLiveNums;
 } gameRules;
@@ -15,8 +15,6 @@ void definePatternNums(char *pattern, list *previous, list *next);
 
 gameRules *createDefaultGameRules();
 
-//gameRules *createGameRules(char *, char *);
-
 void destroyGameRules(gameRules *);
 
 typedef struct _config {
@@ -24,7 +22,7 @@ typedef struct _config {
 //    -y    field size Y
 //    -a    start number of alive cells
 //    -i    number of maximum games's iterations
-//    -f    frequency of saving the field with limit to be less than sqrt(iterations number)
+//    -f    frequency of saving the field (0;1>
 //    -r    game rules (pattern ddd/ddd)
 //    -me   counting neighbourhood method
 //    -mo   mode of game:   1 - load last field; 2 - start

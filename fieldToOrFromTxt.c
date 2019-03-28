@@ -13,7 +13,6 @@ void saveField(field *f, char *filePath) {
     fclose(file);
 }
 
-//test
 field *readField(char *filePath) {
     int sizeX = 0;
     int sizeY = 0;

@@ -12,7 +12,6 @@ int main(int argc, char **argv) {
 
     srand(time(NULL));
     config *conf = createConfig(argc, argv);
-    printf("%d %d %d %d %d %s\n", conf->sizeX, conf->sizeY, conf->aliveCellsNum, conf->iterationsNum, conf->mode,conf->gRules->countingNeighboursMethod);
     playGame(conf);
     destroyConfig(conf);
     return 0;

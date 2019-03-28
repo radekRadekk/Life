@@ -74,10 +74,6 @@ config *createDefaultConfig() {
     return newConfig;
 }
 
-//config *createConfig(int argc, char **argv) {
-//    config *newConfig = createDefaultConfig();
-//    return newConfig;
-//}
 config *createConfig(int argc, char **argv) {
     config *newConfig = createDefaultConfig();
     int tmpAliveCellsNum = -1;
@@ -106,8 +102,11 @@ config *createConfig(int argc, char **argv) {
         }
     }
 
-    if ((tmpAliveCellsNum <= newConfig->sizeX * newConfig->sizeY) && tmpAliveCellsNum != -1) {
+    if ((tmpAliveCellsNum <= newConfig->sizeX * newConfig->sizeY) && tmpAliveCellsNum != -1 &&
+        tmpAliveCellsNum <= (newConfig->sizeX * newConfig->sizeY)) {
         newConfig->aliveCellsNum = tmpAliveCellsNum;
+    } else {
+        newConfig->aliveCellsNum = (int) (newConfig->sizeX * newConfig->sizeY * 0.33);
     }
     if (tmpMode == 1 || tmpMode == 2) {
         newConfig->mode = tmpMode;
