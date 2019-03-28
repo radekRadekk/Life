@@ -46,19 +46,15 @@ void definePatternNums(char *pattern, list *previous, list *next) {
         add(next, pattern[i++] - '0');
 }
 
-gameRules *createGameRules(char *rulesPattern, char *countingNeighboursMethod) {
-    char *DEFAULT_PATTERN = "23/3";
-    gameRules *gRules = malloc(sizeof(*gRules));
-    gRules->liveToLiveNums = createList(-1);
-    gRules->deadToLiveNums = createList(-1);
-    gRules->countingNeighboursMethod = countingNeighboursMethod;
-    char *pattern = rulesPattern;
-    if (isGoodPattern(pattern) == 0)
-        pattern = DEFAULT_PATTERN;
-
-    definePatternNums(pattern, gRules->liveToLiveNums, gRules->deadToLiveNums);
-
-    return gRules;
+gameRules *createDefaultGameRules() {
+    gameRules *newGameRules = malloc(sizeof(*newGameRules));
+    char *countingMethod = malloc(6);
+    countingMethod = "MOORE";
+    newGameRules->countingNeighboursMethod = countingMethod;
+    newGameRules->liveToLiveNums = createList(-1);
+    newGameRules->deadToLiveNums = createList(-1);
+    definePatternNums("23/3", newGameRules->liveToLiveNums, newGameRules->deadToLiveNums);
+    return newGameRules;
 }
 
 void destroyGameRules(gameRules *gRules) {
@@ -67,20 +63,23 @@ void destroyGameRules(gameRules *gRules) {
     free(gRules);
 }
 
-config *createConfig(int argc, char **argv) {
+config *createDefaultConfig() {
     config *newConfig = malloc(sizeof(*newConfig));
     newConfig->sizeX = 100;
     newConfig->sizeY = 100;
-    newConfig->aliveCellsNum = 100;
+    newConfig->aliveCellsNum = 3333;
     newConfig->iterationsNum = 100;
-    newConfig->savingFreq = /*sqrt(*/newConfig->iterationsNum/*)*/;
+    newConfig->savingFreq = 0.1;
     newConfig->mode = 2;
-    int tmpAliveCellsNum = 100;
-    int tmpSavingFreq = 10;
-    int tmpSavingFreqNoLimit = -1;
-    int tmpMode = 2;
-    char *tmpGameRulesPattern = "xxx";
-    char *tmpMethod = "MOORE";
+    newConfig->gRules = createDefaultGameRules();
+    return newConfig;
+}
+
+config *createConfig(int argc, char **argv) {
+    config *newConfig = createDefaultConfig();
+    int tmpAliveCellsNum = -1;
+    char *tmpGameRulesPattern = NULL;
+    int tmpMode = -1;
 
     for (int i = 1; i < argc - 1; i++) {
         if ((strcmp(argv[i], "-x") == 0) && (atoi(argv[i + 1]) > 0)) {
@@ -91,32 +90,31 @@ config *createConfig(int argc, char **argv) {
             tmpAliveCellsNum = atoi(argv[i + 1]);
         } else if ((strcmp(argv[i], "-i") == 0) && (atoi(argv[i + 1]) > 0)) {
             newConfig->iterationsNum = atoi(argv[i + 1]);
-        } else if ((strcmp(argv[i], "-f") == 0) && (atoi(argv[i + 1]) > 0)) {
-            tmpSavingFreq = atoi(argv[i + 1]);
-        } else if ((strcmp(argv[i], "-ff") == 0) && (atoi(argv[i + 1]) > 0)) {
-            tmpSavingFreqNoLimit = atoi(argv[i + 1]);
+        } else if ((strcmp(argv[i], "-f") == 0) && (atof(argv[i + 1]) > 0) && (atof(argv[i + 1]) <= 1)) {
+            newConfig->savingFreq = atof(argv[i + 1]);
         } else if (strcmp(argv[i], "-r") == 0) {
             tmpGameRulesPattern = argv[i + 1];
-        } else if ((strcmp(argv[i], "-me") == 0)&&(strcmp(argv[i],"NEUMANN")==0)) {
-            tmpMethod = argv[i + 1];
+        } else if ((strcmp(argv[i], "-me") == 0) &&
+                   ((strcmp(argv[i], "NEUMANN") == 0) || (strcmp(argv[i], "MOORE") == 0))) {
+            free(newConfig->gRules->countingNeighboursMethod);
+            newConfig->gRules->countingNeighboursMethod = argv[i + 1];
         } else if ((strcmp(argv[i], "-mo") == 0) && (atoi(argv[i + 1]) > 0)) {
             tmpMode = atoi(argv[i + 1]);
         }
     }
 
-    if (tmpAliveCellsNum <= 0.5 * newConfig->sizeX * newConfig->sizeY) {
+    if ((tmpAliveCellsNum <= newConfig->sizeX * newConfig->sizeY) && tmpAliveCellsNum != -1) {
         newConfig->aliveCellsNum = tmpAliveCellsNum;
-    }
-    if (tmpSavingFreq <= /*(int) sqrt(*/newConfig->iterationsNum)/*)*/ {
-        newConfig->savingFreq = tmpSavingFreq;
     }
     if (tmpMode == 1 || tmpMode == 2) {
         newConfig->mode = tmpMode;
-    }                                                                                                       //jak coś będzię nie tak z częstotliwośćią to tu szukać
-    if (tmpSavingFreqNoLimit < newConfig->iterationsNum && tmpSavingFreqNoLimit != -1) {
-        newConfig->savingFreq = tmpSavingFreqNoLimit;
     }
-    newConfig->gRules = createGameRules(tmpGameRulesPattern, tmpMethod);
+    if (tmpGameRulesPattern != NULL) {
+        if (isGoodPattern(tmpGameRulesPattern) == 1) {
+            definePatternNums(tmpGameRulesPattern, newConfig->gRules->liveToLiveNums,
+                              newConfig->gRules->deadToLiveNums);
+        }
+    }
 
     return newConfig;
 }

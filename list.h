@@ -2,16 +2,16 @@
 #define LIFE_LIST_H
 
 typedef struct _list {
-    int value;
+    unsigned short int value;
     struct _list *next;
 } list;
 
-list *createList(int num);
+list *createList(unsigned short int num);
 
 void destroyList(list *);
 
-void add(list *, int num);
+void add(list *, unsigned short int num);
 
-int contains(list *l, int num);
+int contains(list *l, unsigned short int num);
 
 #endif //LIFE_LIST_H

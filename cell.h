@@ -3,13 +3,13 @@
 #define LIFE_CELL_H
 
 typedef struct _cell {
-    int x;
-    int y;
-    int isAlive;
-    int neighboursNum;
+    unsigned short int x;
+    unsigned short int y;
+    unsigned short int isAlive;
+    unsigned short int neighboursNum;
 } cell;
 
-cell *createCell(int x, int y);
+cell *createCell(unsigned short int x, unsigned short int y);
 
 void destroyCell(cell *c);
 

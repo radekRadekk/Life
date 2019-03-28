@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "list.h"
 
-list *createList(int num) {
+list *createList(unsigned short int num) {
     list *newList = malloc(sizeof(*newList));
     newList->value = num;
     newList->next = NULL;
@@ -17,7 +17,7 @@ void destroyList(list *l) {
     free(l);
 }
 
-void add(list *l, int num) {
+void add(list *l, int unsigned short num) {
     if (l == NULL) {
         l = createList(num);
     } else {
@@ -29,7 +29,7 @@ void add(list *l, int num) {
 }
 
 // 1 - true, 0 - false
-int contains(list *l, int num) {
+int contains(list *l, int unsigned short num) {
     list *iter = l;
     while (iter->next != NULL) {
         if (iter->value == num)

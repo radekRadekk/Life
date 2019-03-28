@@ -4,12 +4,12 @@
 #include "cell.h"
 
 typedef struct _field {
-    int sizeX;
-    int sizeY;
+    unsigned short int sizeX;
+    unsigned short int sizeY;
     cell **gameField;
 } field;
 
-field *createField(int sizeX, int sizeY);
+field *createField(unsigned short int sizeX, unsigned short int sizeY);
 
 cell *getCell(field *, int x, int y);
 
@@ -24,6 +24,8 @@ void countNeighboursNeumann(cell *, field *);
 void countNeighbours(field *, char *);
 
 int isAnyAlive(field *);
+
+void printField(field *f);
 
 #endif //LIFE_FIELD_H
 

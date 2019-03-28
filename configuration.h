@@ -13,7 +13,9 @@ int isGoodPattern(char *);
 
 void definePatternNums(char *pattern, list *previous, list *next);
 
-gameRules *createGameRules(char *, char *);
+gameRules *createDefaultGameRules();
+
+//gameRules *createGameRules(char *, char *);
 
 void destroyGameRules(gameRules *);
 
@@ -27,14 +29,16 @@ typedef struct _config {
 //    -r    game rules (pattern ddd/ddd)
 //    -me   counting neighbourhood method
 //    -mo   mode of game:   1 - load last field; 2 - start
-    int sizeX;
-    int sizeY;
+    unsigned short int sizeX;
+    unsigned short int sizeY;
     int aliveCellsNum;
     int iterationsNum;
-    int savingFreq;
+    double savingFreq;
     gameRules *gRules;
-    int mode;
+    unsigned short int mode;
 } config;
+
+config *createDefaultConfig();
 
 config *createConfig(int argc, char **argv);
 

@@ -1,9 +1,10 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "field.h"
 #include "cell.h"
 
-field *createField(int sizeX, int sizeY) {
+field *createField(unsigned short int sizeX, unsigned short int sizeY) {
     field *newField = malloc(sizeof(*newField));
     newField->sizeX = sizeX;
     newField->sizeY = sizeY;
@@ -94,6 +95,15 @@ int isAnyAlive(field *f) {
         }
     }
     return isAnyAlive;
+}
+
+void printField(field *f) {
+    for (int y = 0; y < f->sizeY; y++) {
+        for (int x = 0; x < f->sizeX; x++) {
+            printf("%d ", getCell(f, x, y)->isAlive);
+        }
+        printf("\n");
+    }
 }
 
 

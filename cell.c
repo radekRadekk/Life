@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "cell.h"
 
-cell *createCell(int x, int y) {
+cell *createCell(unsigned short int x, unsigned short int y) {
     cell *newCell = malloc(sizeof(*newCell));
     newCell->x = x;
     newCell->y = y;

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
+#include <math.h>
 #include "game.h"
 #include "field.h"
 #include "imgCreation.h"
@@ -56,7 +57,7 @@ void playGame(config *c) {
     int iterNum = 0;
     field *f;
     if (c->mode == 1) {
-        f = readField("fileName");                                  // write save file's name
+        f = readField("/home/radek/Pulpit/work/fileName");                                  // write save file's name
     }
     if (c->mode == 2 || isAnyAlive(f) == 0) {
         f = createField(c->sizeX, c->sizeY);
@@ -65,7 +66,7 @@ void playGame(config *c) {
 
     while (isAnyAlive(f) == 1 && iterNum < c->iterationsNum) {
         doGeneration(f, c->gRules);
-        if (iterNum % c->savingFreq == 0) {
+        if (iterNum % ((int) pow(c->savingFreq, -1)) == 0) {
             createImage(f, "picture", iterNum);
         }
         iterNum++;
