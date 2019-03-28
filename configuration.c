@@ -6,6 +6,7 @@
 #include "configuration.h"
 #include "list.h"
 
+
 // 1 - true, 0 - false
 int isGoodPattern(char *rulesPattern) {
     char *iter = rulesPattern;
@@ -48,11 +49,9 @@ void definePatternNums(char *pattern, list *previous, list *next) {
 
 gameRules *createDefaultGameRules() {
     gameRules *newGameRules = malloc(sizeof(*newGameRules));
-    char *countingMethod = malloc(6);
-    countingMethod = "MOORE";
-    newGameRules->countingNeighboursMethod = countingMethod;
-    newGameRules->liveToLiveNums = createList(-1);
-    newGameRules->deadToLiveNums = createList(-1);
+    newGameRules->countingNeighboursMethod = "MOORE";
+    newGameRules->liveToLiveNums = createList(10);
+    newGameRules->deadToLiveNums = createList(10);
     definePatternNums("23/3", newGameRules->liveToLiveNums, newGameRules->deadToLiveNums);
     return newGameRules;
 }
@@ -75,6 +74,10 @@ config *createDefaultConfig() {
     return newConfig;
 }
 
+//config *createConfig(int argc, char **argv) {
+//    config *newConfig = createDefaultConfig();
+//    return newConfig;
+//}
 config *createConfig(int argc, char **argv) {
     config *newConfig = createDefaultConfig();
     int tmpAliveCellsNum = -1;
@@ -111,6 +114,10 @@ config *createConfig(int argc, char **argv) {
     }
     if (tmpGameRulesPattern != NULL) {
         if (isGoodPattern(tmpGameRulesPattern) == 1) {
+            destroyList(newConfig->gRules->liveToLiveNums);
+            destroyList(newConfig->gRules->deadToLiveNums);
+            newConfig->gRules->liveToLiveNums = createList(10);
+            newConfig->gRules->deadToLiveNums = createList(10);
             definePatternNums(tmpGameRulesPattern, newConfig->gRules->liveToLiveNums,
                               newConfig->gRules->deadToLiveNums);
         }

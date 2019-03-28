@@ -67,7 +67,8 @@ void playGame(config *c) {
     while (isAnyAlive(f) == 1 && iterNum < c->iterationsNum) {
         doGeneration(f, c->gRules);
         if (iterNum % ((int) pow(c->savingFreq, -1)) == 0) {
-            createImage(f, "picture", iterNum);
+//            createImage(f, "picture", iterNum);
+            printf("picture\n");
         }
         iterNum++;
     }

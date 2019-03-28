@@ -25,7 +25,6 @@ typedef struct _config {
 //    -a    start number of alive cells
 //    -i    number of maximum games's iterations
 //    -f    frequency of saving the field with limit to be less than sqrt(iterations number)
-//    -ff   frequency of saving the field without limits
 //    -r    game rules (pattern ddd/ddd)
 //    -me   counting neighbourhood method
 //    -mo   mode of game:   1 - load last field; 2 - start
